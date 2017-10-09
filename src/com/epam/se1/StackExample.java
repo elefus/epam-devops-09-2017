@@ -12,7 +12,7 @@ public class StackExample extends Object {
         System.out.println(a);
     }
 
-    public static void main(String[] args) {
+    public static void main(String...args) {
         // <- [ main | object ]
 
         StackExample object = new StackExample(1);
@@ -87,8 +87,13 @@ public class StackExample extends Object {
         // 1 ^ 1 = 0
 
 
+        double val1 = 1d /2;
+        double val2 = 0.25 * 2;
+        if (Math.abs(val1 - val2) < 0.000001) {
 
+        }
 
+//        int intValue = main("");
     }
 
     public void anotherMethod() {
