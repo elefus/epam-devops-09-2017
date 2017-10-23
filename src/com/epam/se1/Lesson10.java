@@ -1,124 +1,96 @@
 package com.epam.se1;
 
-import java.util.Arrays;
-import java.util.Objects;
+import com.epam.practice.IntList;
+
+import java.io.PrintStream;
 
 public class Lesson10 {
 
-
-
-}
-
-
-class Person implements Cloneable {
-
-    public static Person zombie;
-    private final String name;
-    private final String surname;
-    private final String patronymic;
-    private String[] numbers;
-
-    public Person(Person other) {
-        name = other.name;
-        surname = other.surname;
-        patronymic = other.patronymic;
-        numbers = Arrays.copyOf(other.numbers, other.numbers.length);
+    {
+//        System.out.println(value);
     }
 
-    public Person(String name, String surname, String patronymic, String[] numbers) {
-        this.name = name;
-        this.surname = surname;
-        this.patronymic = patronymic;
-        this.numbers = numbers;
+    private final int value;
+    private static final IntList STATIC_LIST = initStaticList();
+    private static final String STRING_VALUE = "123";
+
+    public final static PrintStream out = null;
+
+    private static IntList initStaticList() {
+        IntList staticList = new IntList();
+        staticList.add(1);
+        staticList.add(2);
+        staticList.add(3);
+        return staticList;
     }
 
-    Person(String name, String surname, String patronymic) {
-        this.name = name;
-        this.surname = surname;
-        this.patronymic = patronymic;
-
+    static {
+        int value = 10;
+        System.out.println("Static init block 1 " + value);
+//        STATIC_LIST = null;
     }
 
-    @Override
-    public int hashCode() {
-        int sum = name.hashCode();
-        sum = sum * 31 + surname.hashCode();
-        sum = sum * 31 + patronymic.hashCode();
-        return sum;
+    {
+        System.out.println("Non-static init block 1");
+        value = 100;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (obj == this) {
-            return true;
-        }
-        if (obj.getClass() != Person.class) {
-            return false;
-        }
-        Person other = (Person)obj;
-        return other.name.equals(name)
-            && other.surname.equals(surname)
-            && other.patronymic.equals(patronymic);
+    static {
+        System.out.println("Static init block 2");
     }
 
-    @Override
-    public String toString() {
-        return "Person{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", patronymic='" + patronymic + '\'' +
-                '}';
+    {
+        int value = 20;
+        System.out.println("Non-static init block 2 " + value);
     }
 
-    @Override
-    protected void finalize() throws Throwable {
-        zombie = this;
+    Lesson10() {
+        System.out.println("Constructor");
     }
 
-    @Override
-    public Person clone() {
-        try {
-            Person result = (Person) super.clone();
-            result.numbers = Arrays.copyOf(numbers, numbers.length);
-            return result;
-        } catch (CloneNotSupportedException ex) {
-            throw new Error(ex);
-        }
+    {
+        int value = 10;
+        System.out.println("Non-static init block 3" + value);
     }
 
-    public String[] getNumbers() {
-        return numbers;
+    Lesson10(int value) {
     }
-}
-
-
-class E {
 
     public static void main(String[] args) {
-        varargs(1, 2);
-        anArray(1, 2, new int[0]);
+//        constructorExample();
+//        System.out.println(PublicStaticFinalExample.STR);
+        new Lesson10();
+        new Lesson10();
+
+        {
+            int value = 10;
+            System.out.println(value);
+        }
+
+        try {
+            Class<?> clazz = Class.forName("com.epam.se1.Literals");
+            System.out.println(clazz);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 
-    public static void varargs(int a, int b, int...other) {
+    private static void constructorExample() {
+        Lesson10 lesson10 = new Lesson10();
+        lesson10.method(10);
+
+        System.out.println(lesson10.value);
+        // method(lesson10, 10);
+
+
+        new Lesson10(10);
     }
 
-    public static void anArray(int a, int b, int[] other) {
-
+    public void method(Lesson10 this, int value) {
+        System.out.println(value);
+        System.out.println(this);
     }
-
-    public Number getNumber() {
-        return null;
-    }
-
 }
 
-class F extends E {
 
-    @Override
-    public Integer getNumber() {
-        return 1;
-    }
-}
