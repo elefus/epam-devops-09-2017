@@ -1,8 +1,12 @@
 package com.epam.practice;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class IntList {
 
     private int[] arr;
+    private int current;
 
     public IntList() {
         arr = new int[16];
@@ -69,5 +73,52 @@ public class IntList {
 
     public void trimToSize() {
         // TODO уменьшает размер внутреннего массива до актуального значения
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        IntList intList = (IntList) o;
+        return Arrays.equals(arr, intList.arr);
+    }
+
+    public boolean equalsPlain(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        IntList _this = this;
+        Object objectThis = (Object)this;
+        if (obj == objectThis) {
+            return true;
+        }
+
+        if (obj.getClass() != IntList.class) {
+            return false;
+        }
+        if (!(obj instanceof IntList)) {
+            return false;
+        }
+
+        IntList other = (IntList)obj;
+        if (this.current != other.current) {
+            return false;
+        }
+        for (int i = 0; i < this.current; i++) {
+            if (arr[i] != other.arr[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int sum = 0;
+        for (int i = 0; i < current; i++) {
+            sum = sum * 31 +  arr[i];
+        }
+        return sum;
     }
 }
