@@ -1,5 +1,7 @@
 package com.epam.se2.lesson14;
 
+import com.epam.practice.Iterator;
+
 import java.util.Arrays;
 
 public class GenericArrayList<T> implements GenericList<T> {
@@ -146,4 +148,43 @@ public class GenericArrayList<T> implements GenericList<T> {
         return b.append(arr[currentLength-1]).append("]").toString();
     }
 
+    @Override
+    public Iterator<T> getIterator() {
+        return new InnerIterator();
+    }
+
+    private class InnerIterator implements Iterator<T> {
+
+        private int currentIndex;
+
+        @Override
+        public boolean hasNext() {
+            return currentIndex < size();
+        }
+
+        @Override
+        public T next() {
+            return (T) arr[currentIndex++];
+        }
+    }
+}
+
+class GenericArrayListIterator<T> implements Iterator<T> {
+
+    private final GenericArrayList<T> list;
+    private int index = 0;
+
+    GenericArrayListIterator(GenericArrayList<T> list) {
+        this.list = list;
+    }
+
+    @Override
+    public boolean hasNext() {
+        return index < list.size();
+    }
+
+    @Override
+    public T next() {
+        return list.get(index++);
+    }
 }

@@ -1,5 +1,7 @@
 package com.epam.se2.lesson14;
 
+import com.epam.practice.Iterator;
+
 public class IntegerArrayList implements GenericList<Number> {
     @Override
     public void add(Number value) {
@@ -54,5 +56,10 @@ public class IntegerArrayList implements GenericList<Number> {
     @Override
     public int lastIndexOf(Number value) {
         return 0;
+    }
+
+    @Override
+    public Iterator<Number> getIterator() {
+        return null;
     }
 }
