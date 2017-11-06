@@ -1,3 +1,5 @@
 *.iml
-out
+out/
+target/
+*.log
 .idea
