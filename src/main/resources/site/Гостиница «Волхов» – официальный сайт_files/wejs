@@ -1,0 +1,1 @@
+document.write( '<script src="https://www.tripadvisor.ru/WidgetEmbed-certificateOfExcellence?year=2016&locationId=4463116&display_version=2&uniq=999&lang=ru"></script>' );
