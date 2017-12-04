@@ -10,10 +10,24 @@ public class Server {
         ServerSocket serverSocket = new ServerSocket(10_000);
 
         while (true) {
-            try (Socket clientSocket = serverSocket.accept();
-                 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                 BufferedWriter out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()))) {
+            Socket socket = serverSocket.accept();
+            new Thread(new HandlerSocket(socket)).start();
+        }
+    }
+}
 
+class HandlerSocket implements Runnable {
+
+    private final Socket socket;
+
+    HandlerSocket(Socket socket) {
+        this.socket = socket;
+    }
+
+    @Override
+    public void run() {
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()))){
 
                 String request = in.readLine();
                 String[] peaces = request.split(" ");
@@ -33,9 +47,8 @@ public class Server {
                 out.write("<h1>Hello world!</h1>\r\n");
                 out.write("</body>\r\n");
                 out.write("</html>\r\n");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
