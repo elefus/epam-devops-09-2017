@@ -1,4 +1,4 @@
-package com.epam.se5.lesson28;
+package com.epam.se6.lesson28;
 
 public class Clicker extends Thread {
     int click = 0;
