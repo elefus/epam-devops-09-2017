@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app>
+    <servlet id="hello_servlet_id">
+        <servlet-name>hello</servlet-name>
+        <servlet-class>com.davidflanagan.examples.servlet.Hello</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>counter</servlet-name>
+        <servlet-class>com.davidflanagan.examples.servlet.Counter</servlet-class>
+        <init-param>
+            <param-name>countfile</param-name>
+            <param-value>/tmp/counts.ser</param-value>
+        </init-param>
+        <init-param>
+            <param-name>saveInterval</param-name>
+            <param-value>30000</param-value>
+        </init-param>
+    </servlet>
+    <servlet>
+        <servlet-name>query</servlet-name>
+        <servlet-class>com.davidflanagan.examples.servlet.Query</servlet-class>
+        <init-param>
+            <param-name>driverClassName</param-name>         <param-value>org.gjt.mm.mysql.Driver</param-value>     </init-param>
+        <init-param>
+            <param-name>url</param-name>
+            <param-value>jdbc:mysql://dbserver.my.domain.com/dbname</param-value>
+        </init-param>
+        <init-param>
+            <param-name>username</param-name>
+            <param-value>david</param-value>
+        </init-param>
+        <init-param>
+            <param-name>password</param-name>
+            <param-value>secret</param-value>
+        </init-param>
+    </servlet>
+    <servlet>
+        <servlet-name>queryOtherDatabase</servlet-name>
+        <servlet-class>com.davidflanagan.examples.servlet.Query</servlet-class>
+    </servlet>
+
+    <servlet>      <servlet-name>logout</servlet-name>
+        <servlet-class>com.davidflanagan.examples.servlet.Logout</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>counter</servlet-name>      <url-pattern>*.count</url-pattern>      </servlet-mapping>
+
+    <session-config>
+        <session-timeout>15</session-timeout>   </session-config>
+
+    <taglib>
+        <taglib-uri>http://www.davidflanagan.com/tlds/decor_0_1.tld</taglib-uri>
+        <taglib-location>decor_0_1.tld</taglib-location>
+    </taglib>
+</web-app>
