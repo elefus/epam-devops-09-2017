@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<students>
+<stud:students xmlns:stud="http://www.example.com/students">
     <student login="mit" faculty="mmf">
         <name>Mitar Alex</name>
         <telephone>2456474</telephone>
@@ -18,4 +18,4 @@
             <street>Knorina 56</street>
         </address>
     </student>
-</students>
+</stud:students>

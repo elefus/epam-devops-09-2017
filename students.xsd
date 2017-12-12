@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.com/students" xmlns:stud="http://www.example.com/students">
+    <element name="students">
+        <complexType>
+            <sequence>
+                <element name="student" type="stud:Student" maxOccurs="unbounded" />
+            </sequence>
+        </complexType>
+    </element>
+    <complexType name="Student">
+        <sequence>
+            <element name="name" type="string" />
+            <element name="telephone" type="integer" />
+            <element name="address" type="stud:Address" />
+        </sequence>
+        <attribute name="login" type="stud:Login" use="required" />
+
+        <attribute name="faculty">
+            <simpleType>
+                <restriction base="string">
+                    <enumeration value="famcs"/>
+                    <enumeration value="mmf"/>
+                    <enumeration value="rfe"/>
+                </restriction>
+            </simpleType>
+        </attribute>
+    </complexType>
+    <simpleType name="Login">
+        <restriction base="ID">
+            <pattern value="[a-zA-Z]{3}[a-zA-Z0-9_]*" />
+        </restriction>
+    </simpleType>
+    <complexType name="Address">
+        <sequence>
+            <element name="country" type="string" />
+            <element name="city" type="string" />
+            <element name="street" type="string" />
+        </sequence>
+    </complexType>
+</schema>
