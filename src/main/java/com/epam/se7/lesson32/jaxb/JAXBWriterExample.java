@@ -13,7 +13,7 @@ public class JAXBWriterExample {
             Marshaller marshaller = context.createMarshaller();
             Student.Address address = new Student.Address("BLR", "Minsk","Skoriny 4");
             Student student = new Student("mendig", "Dmitry Terenya", "rfe", 2066394, address);
-            marshaller.marshal(student, new FileOutputStream("stud.xml"));
+            marshaller.marshal(student, new FileOutputStream("stud1.xml"));
             marshaller.marshal(student, System.out);
             System.out.println("XML-файл создан");
         } catch (FileNotFoundException ex) {

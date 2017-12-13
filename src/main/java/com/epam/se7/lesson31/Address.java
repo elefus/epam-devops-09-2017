@@ -5,6 +5,9 @@ public class Address {// внутренний класс
     private String city;
     private String street;
     public Address() {
+        country = "EMPTY";
+        city = "EMPTY";
+        street = "EMPTY";
     }
     public Address(String country, String city, String street) {
         this.country = country;

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<student faculty="rfe" login="mendig">
+    <name>Dmitry Terenya</name>
+    <telephone>2066394</telephone>
+    <address>
+        <city>Minsk</city>
+        <country>BLR</country>
+        <street>Skoriny 4</street>
+    </address>
+</student>

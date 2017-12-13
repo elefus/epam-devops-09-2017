@@ -1,37 +1,35 @@
 package com.epam.se7.lesson32;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.sql.*;
+import java.util.Enumeration;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 public class H2DbExample {
 
     public static void main(String[] args) throws Exception {
-        Connection conn = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test1", "sa", "");
+        Class.forName("org.h2.Driver");
+        Connection connection = DriverManager.getConnection("jdbc:h2:~/university", "sa", "");
+        Statement statement = connection.createStatement();
+        statement.execute("USE UNIVERSITY");
+        getDepartments(statement);
 
-        Statement st = conn.createStatement();
-        st.execute("DROP TABLE STUDENTS IF EXISTS");
-        st.execute("CREATE TABLE STUDENTS(ID INT PRIMARY KEY, NAME VARCHAR(255),  HOBBY VARCHAR(255));");
-        st.execute("INSERT INTO STUDENTS VALUES(1, 'Ivanov', '');");
-        st.execute("INSERT INTO STUDENTS VALUES(2, 'Petrov', 'Swim');");
-        st.execute("INSERT INTO STUDENTS VALUES(3, 'Sidorov', '');");
-        st.execute("INSERT INTO STUDENTS VALUES(4, 'Andreev', 'Wrestling');");
+        int modified = statement.executeUpdate("INSERT INTO DEPARTMENTS (ID, NAME, ACRONYM) VALUES (4, 'ФКТИ2', 'ФКТИ2')");
+        System.out.println(modified);
+        getDepartments(statement);
 
-        ResultSet result = st.executeQuery("SELECT * FROM STUDENTS");
 
-        String id = "", name = "", hobby = "";
 
+
+
+    }
+
+    private static void getDepartments(Statement statement) throws SQLException {
+        ResultSet result = statement.executeQuery("SELECT * FROM DEPARTMENTS;");
         while (result.next()) {
-            id = result.getString("ID");
-            name = result.getString("NAME");
-            hobby = result.getString("HOBBY");
-
-
-            if (hobby.equals("")) {
-                hobby = "Нет хобби";
-            }
-            System.out.printf("%3s | %-10s | %-10s \n", id, name, hobby);
+            System.out.println(result.getInt("ID") + " " + result.getString("NAME") + " " + result.getString( "ACRONYM"));
         }
     }
 

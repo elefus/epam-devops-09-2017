@@ -4,6 +4,7 @@ import com.epam.se7.lesson31.Address;
 import com.epam.se7.lesson31.Student;
 import org.jdom2.Document;
 import org.jdom2.Element;
+import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
 import java.io.FileOutputStream;
@@ -54,7 +55,7 @@ public class JDOMWriterExample {
 
     private static boolean saveDocument(String fileName, Document doc) {
         try {
-            new XMLOutputter().output(doc, new FileOutputStream(fileName));
+            new XMLOutputter(Format.getPrettyFormat()).output(doc, new FileOutputStream(fileName));
             return true;
         } catch (IOException ex) {
             ex.printStackTrace();

@@ -18,7 +18,6 @@ public class JAXBReaderExample {
             JAXBElement<Student> unmarshal1 = unmarshaller.unmarshal(reader, Student.class);
             Student unmarshal = unmarshal1.getValue();
             System.out.println(unmarshal);
-            System.out.println("XML-файл создан");
         } catch (JAXBException ex) {
             System.out.println("JAXB-исключения");
             ex.printStackTrace();
